@@ -3,8 +3,9 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 function App() {
   return (
-    <Box sx={{ backgroundColor: "red" }}>
+    <Box>
       <Navbar />
+      <div>asdasd </div>
       <Footer />
     </Box>
   );
