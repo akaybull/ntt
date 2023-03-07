@@ -1,6 +1,6 @@
-import { AppBar, Toolbar, Typography, InputBase, Button } from "@mui/material";
+import { AppBar, Toolbar, InputBase, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
-
+import DropdownMenu from "./DropdownMenu";
 import React from "react";
 import { NttIcon, SearchIcon } from "../assets/icons";
 const StyledAppBar = styled(AppBar)({
@@ -48,6 +48,7 @@ const Navbar = () => {
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
             />
+            <DropdownMenu />
           </div>
           <StyledButton
             variant="contained"
