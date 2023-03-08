@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MenuItem, Menu, Button } from "@mui/material";
 import { ArrowDownIcon } from "../assets/icons";
 import styled from "@emotion/styled";
-const StyledButton = styled(Button)({
+const StyledDropdownButton = styled(Button)({
   backgroundColor: "#F4F5F6",
   textTransform: "none",
   width: "152px",
@@ -12,8 +12,11 @@ const StyledButton = styled(Button)({
   "& .MuiButton-endIcon": {
     marginLeft: "10px",
   },
+  "@media (max-width: 640px)": {
+    display: "none",
+  },
 });
-const StyledMenu = styled(Menu)({
+const StyledDropdownMenu = styled(Menu)({
   "& .MuiPaper-root": {
     padding: "12px",
     width: "auto",
@@ -60,15 +63,15 @@ export default function DropdownMenu() {
   };
   return (
     <div>
-      <StyledButton
+      <StyledDropdownButton
         aria-controls="simple-menu"
         aria-haspopup="true"
         onClick={handleClick}
         endIcon={<ArrowDownIcon />}
       >
         {selectedValue ? selectedValue : "Categories"}
-      </StyledButton>
-      <StyledMenu
+      </StyledDropdownButton>
+      <StyledDropdownMenu
         id="simple-menu"
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
@@ -83,7 +86,7 @@ export default function DropdownMenu() {
             {option}
           </MenuItem>
         ))}
-      </StyledMenu>
+      </StyledDropdownMenu>
     </div>
   );
 }
