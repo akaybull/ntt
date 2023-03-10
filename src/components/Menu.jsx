@@ -29,34 +29,17 @@ const ResponsiveMenu = () => {
 
   return (
     <>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            onClick={handleMenuButtonClick}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Responsive Menu
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer anchor="left" open={isDrawerOpen} onClose={handleDrawerClose}>
-        <List>
-          <ListItem button onClick={handleMenuItemClick}>
-            <ListItemText primary="Menü Öğesi 1" />
-          </ListItem>
-          <ListItem button onClick={handleMenuItemClick}>
-            <ListItemText primary="Menü Öğesi 2" />
-          </ListItem>
-          <ListItem button onClick={handleMenuItemClick}>
-            <ListItemText primary="Menü Öğesi 3" />
-          </ListItem>
-        </List>
-      </Drawer>
+      <List>
+        <ListItem onClick={handleMenuItemClick}>
+          <ListItemText primary="Menü Öğesi 1" />
+        </ListItem>
+        <ListItem onClick={handleMenuItemClick}>
+          <ListItemText primary="Menü Öğesi 2" />
+        </ListItem>
+        <ListItem onClick={handleMenuItemClick}>
+          <ListItemText primary="Menü Öğesi 3" />
+        </ListItem>
+      </List>
     </>
   );
 };

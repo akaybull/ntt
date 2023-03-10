@@ -3,13 +3,14 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import HeaderMenu from "./components/Menu";
 import Sliderr from "./components/Slider";
+import Content from "./components/Content";
 function App() {
   return (
     <Box>
       <Navbar />
       <HeaderMenu />
       <Sliderr />
-      <div>asdasd </div>
+      <Content />
       <Footer />
     </Box>
   );
