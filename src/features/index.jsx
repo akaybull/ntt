@@ -6,9 +6,10 @@ const initialState = {
   favoriteProducts: [],
   isShowFavorite: false,
   favoriteCount: 0,
+  firstFourProduct: [],
 };
-export const getCardsAsync = createAsyncThunk(
-  "getCardsAsync",
+export const getProducts = createAsyncThunk(
+  "getProducts",
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
@@ -49,15 +50,19 @@ export const productSlice = createSlice({
     setShowFavorite: (state, action) => {
       state.isShowFavorite = action.payload;
     },
+    setFourProduct: (state, action) => {
+      state.firstFourProduct = action.payload;
+    },
   },
   extraReducers: {
-    [getCardsAsync.fulfilled]: (state, action) => {
-      state.cardItems = action.payload.map((item) => ({
+    [getProducts.fulfilled]: (state, action) => {
+      state.products = action.payload.map((item) => ({
         ...item,
         isFavorite: false,
       }));
     },
   },
 });
-export const { addToFav, setShowFavorite } = productSlice.actions;
+export const { addToFav, setShowFavorite, setFourProduct } =
+  productSlice.actions;
 export default productSlice.reducer;

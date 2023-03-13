@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import { FavoriteIcon, MoreIcon } from "../assets/icons";
 import styled from "@emotion/styled";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { getCardsAsync } from "../features/index";
+import { getProducts, setFourProduct } from "../features/index";
 import { useDispatch, useSelector } from "react-redux";
 
 const StyledIconButton = styled(IconButton)({
@@ -51,15 +51,26 @@ const StyledHeaderTypo = styled(Typography)({
 });
 const Content = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.reducer.cardItems);
+  const products = useSelector((state) => state.reducer.products);
+  const fourProducts = useSelector((state) => state.reducer.firstFourProduct);
+  const [likeCount, setLikeCount] = useState(0);
+  const [showMore, setShowMore] = useState(4);
+  const [loaded, setLoaded] = useState(false);
+  const [firstloaded, setFirstLoaded] = useState(false);
+
   useEffect(() => {
-    dispatch(getCardsAsync());
+    dispatch(getProducts());
   }, [dispatch]);
+
   useEffect(() => {
     products && setLoaded(true);
+    products && dispatch(setFourProduct(products.slice(0, 4)));
+    fourProducts && setFirstLoaded(true);
   }, [products]);
-  const [likeCount, setLikeCount] = useState(0);
-  const [loaded, setLoaded] = useState(false);
+  const handleShowMore = () => {
+    dispatch(setFourProduct(products.slice(0, showMore + 4)));
+    setShowMore(showMore + 4);
+  };
   return (
     <Box className="sm:px-16 lg:px-32 p-4 flex flex-col my-10">
       <div className="flex justify-between">
@@ -78,7 +89,8 @@ const Content = () => {
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mt-10">
         {loaded &&
-          products.map((item) => (
+          firstloaded &&
+          fourProducts.map((item) => (
             <div id={item.id} className="flex relative w-full">
               <CardContent className="border rounded">
                 <CardMedia component="img" image={item.imageUrl}></CardMedia>
@@ -121,13 +133,16 @@ const Content = () => {
           ))}
       </div>
       <div className="flex justify-center my-10">
-        <StyledMoreButton
-          variant="contained"
-          color="primary"
-          endIcon={<MoreIcon>send</MoreIcon>}
-        >
-          Daha fazla
-        </StyledMoreButton>
+        {loaded && products.length > showMore && (
+          <StyledMoreButton
+            variant="contained"
+            color="primary"
+            endIcon={<MoreIcon>send</MoreIcon>}
+            onClick={() => handleShowMore()}
+          >
+            Daha fazla
+          </StyledMoreButton>
+        )}
       </div>
     </Box>
   );
