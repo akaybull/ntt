@@ -87,11 +87,11 @@ const Content = () => {
           </StyledLikedButton>
         </div>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mt-10">
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mt-10">
         {loaded &&
           firstloaded &&
           fourProducts.map((item) => (
-            <div id={item.id} className="flex relative w-full">
+            <div id={item.id} key={item.id} className="flex relative w-full">
               <CardContent className="border rounded">
                 <CardMedia component="img" image={item.imageUrl}></CardMedia>
                 <StyledIconButton
