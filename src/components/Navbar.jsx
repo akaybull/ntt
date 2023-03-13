@@ -15,6 +15,7 @@ const StyledAppBar = styled(AppBar)({
       minHeight: "120px",
     },
     borderBottom: "none",
+    paddingBottom: "15px",
   },
 });
 const StyledToolbar = styled(Toolbar)({

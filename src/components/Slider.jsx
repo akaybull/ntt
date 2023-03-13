@@ -24,7 +24,14 @@ export const SliderStyled = styled(Slider)`
     opacity: 1;
   }
   & .slick-dots li.slick-active button:before {
-    color: #000;
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid white;
+    margin-top: 4px;
+    margin-left: 4px;
   }
 `;
 
@@ -43,7 +50,7 @@ const Sliderr = () => {
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
   };
 
   return (
