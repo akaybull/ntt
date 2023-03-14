@@ -55,29 +55,13 @@ const Sliderr = () => {
 
   return (
     <SliderStyled {...settings}>
-      <CardMediaStyled
-        component="img"
-        height="450px !important"
-        image={image1}
-      />
+      <CardMediaStyled component="img" image={image1} />
 
-      <CardMediaStyled
-        component="img"
-        height="450px !important"
-        image={image2}
-      />
+      <CardMediaStyled component="img" image={image2} />
 
-      <CardMediaStyled
-        component="img"
-        height="450px !important"
-        image={image3}
-      />
+      <CardMediaStyled component="img" image={image3} />
 
-      <CardMediaStyled
-        component="img"
-        height="450px !important"
-        image={image4}
-      />
+      <CardMediaStyled component="img" image={image4} />
     </SliderStyled>
   );
 };

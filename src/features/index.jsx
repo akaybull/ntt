@@ -3,9 +3,6 @@ import axios from "axios";
 
 const initialState = {
   productItems: [],
-  favoriteProducts: [],
-  isShowFavorite: false,
-  favoriteCount: 0,
   firstFourProduct: [],
 };
 export const getProducts = createAsyncThunk(
