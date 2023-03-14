@@ -39,6 +39,7 @@ const CardMediaStyled = styled(CardMedia)`
   height: 450px !important;
   width: 100%;
   max-width: 100%;
+  height: 100%;
 `;
 
 const Sliderr = () => {
@@ -50,7 +51,7 @@ const Sliderr = () => {
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: false,
+    autoplay: true,
   };
 
   return (

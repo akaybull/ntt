@@ -1,9 +1,10 @@
-import { AppBar, Toolbar, InputBase, Button } from "@mui/material";
+import { AppBar, Toolbar, InputBase, Button, IconButton } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import DropdownMenu from "./DropdownMenu";
-import React from "react";
+import React, { useState } from "react";
 import { NttIcon, SearchIcon, MenuIcon } from "../assets/icons";
 import NavigationMenu from "./Menu";
+import Navigation from "./Test";
 const StyledAppBar = styled(AppBar)({
   backgroundColor: "#fff",
   boxShadow: "none",
@@ -46,6 +47,12 @@ const StyledSearchButton = styled(Button)({
 });
 
 const Navbar = () => {
+  const [open, setOpen] = useState(false);
+
+  const toggleDrawer = () => {
+    console.log("calıştı");
+    setOpen(true);
+  };
   return (
     <>
       <StyledAppBar position="sticky" className="bg-white">
@@ -55,7 +62,15 @@ const Navbar = () => {
               <NttIcon />
             </div>
             <div className="flex w-full items-center justify-end sm:hidden">
-              <MenuIcon />
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                onClick={toggleDrawer}
+              >
+                <MenuIcon />
+              </IconButton>
             </div>
           </div>
           <div className="flex w-full sm:w-3/5 justify-start  xl:justify-center">
@@ -81,7 +96,7 @@ const Navbar = () => {
           </div>
         </StyledToolbar>
       </StyledAppBar>
-      <NavigationMenu />
+      <NavigationMenu openDrawer={open} setOpenDrawer={setOpen} />
     </>
   );
 };

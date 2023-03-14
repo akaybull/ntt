@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import { FavoriteIcon, MoreIcon } from "../assets/icons";
 import styled from "@emotion/styled";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { getProducts, setFourProduct } from "../features/index";
+import { getProducts, setProducts } from "../features/index";
 import { useDispatch, useSelector } from "react-redux";
 
 const StyledIconButton = styled(IconButton)({
@@ -52,7 +52,6 @@ const StyledHeaderTypo = styled(Typography)({
 const Content = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.reducer.products);
-  const fourProducts = useSelector((state) => state.reducer.firstFourProduct);
   const [likeCount, setLikeCount] = useState(0);
   const [showMore, setShowMore] = useState(4);
   const [loaded, setLoaded] = useState(false);
@@ -70,9 +69,8 @@ const Content = () => {
 
   useEffect(() => {
     products && setLoaded(true);
-    products && dispatch(setFourProduct(products));
-
-    fourProducts && setFirstLoaded(true);
+    products && dispatch(setProducts(products));
+    products && setFirstLoaded(true);
   }, [products]);
 
   const handleShowMore = () => {
@@ -80,14 +78,14 @@ const Content = () => {
   };
 
   const handleLikedProducts = (item) => {
-    if (fourProducts.some((elem) => elem.id === item.id)) {
-      const updatedProducts = fourProducts.map((elem) => {
+    if (products.some((elem) => elem.id === item.id)) {
+      const updatedProducts = products.map((elem) => {
         if (elem.id === item.id) {
           return { ...elem, isFavorite: !elem.isFavorite };
         }
         return elem;
       });
-      dispatch(setFourProduct(updatedProducts));
+      dispatch(setProducts(updatedProducts));
     }
     if (!likedProducts.some((elem) => elem.id === item.id)) {
       setLikedProducts([...likedProducts, { ...item, isFavorite: true }]);
@@ -122,7 +120,7 @@ const Content = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mt-10">
         {loaded && firstloaded && !showFavorite
-          ? fourProducts.slice(0, showMore).map((item) => (
+          ? products.slice(0, showMore).map((item) => (
               <div id={item.id} key={item.id} className="flex relative w-full">
                 <CardContent className="border rounded">
                   <CardMedia component="img" image={item.imageUrl}></CardMedia>
@@ -214,7 +212,7 @@ const Content = () => {
             ))}
       </div>
       <div className="flex justify-center my-10">
-        {loaded && products.length > showMore && (
+        {loaded && !showFavorite && products.length > showMore && (
           <StyledMoreButton
             variant="contained"
             color="primary"

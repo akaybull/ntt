@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import { Button, Box, Popover, Typography, CardMedia } from "@mui/material";
+import {
+  Button,
+  Box,
+  Popover,
+  Typography,
+  CardMedia,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+} from "@mui/material";
 import styled from "@emotion/styled";
 import menuImage from "../assets/images/menuImage.jpg";
 
@@ -8,17 +18,17 @@ const StyledButton = styled(Button)({
   fontSize: "14px",
   fontWeight: 500,
   color: "#6A6D70",
+  minWidth: "95px",
 });
 const StyledPopover = styled(Popover)({
   display: "flex",
   width: "100vw",
 });
 const StyledBox = styled(Box)({
-  display: "flex",
   width: "90%",
   overflow: "hidden",
 });
-const Menu = () => {
+const Menu = ({ openDrawer, setOpenDrawer }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handlePopoverOpen = (event) => {
@@ -29,21 +39,43 @@ const Menu = () => {
     setAnchorEl(null);
   };
 
+  const menuItems = [
+    { text: "Menu Item", path: "/" },
+    { text: "Menu Item", path: "/" },
+    { text: "Menu Item", path: "/" },
+    { text: "Menu Item", path: "/" },
+    { text: "Menu Item", path: "/" },
+    { text: "Menu Item", path: "/" },
+    { text: "Menu Item", path: "/" },
+    { text: "Menu Item", path: "/" },
+    { text: "Menu Item", path: "/" },
+    { text: "Menu Item", path: "/" },
+  ];
+
+  const drawer = (
+    <Box sx={{ width: 350 }} role="presentation">
+      <List>
+        {menuItems.map((item, index) => (
+          <ListItem onClick={index == 0 && handlePopoverOpen} key={item.text}>
+            <ListItemText primary={item.text} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
+  const closeFunc = () => {
+    setOpenDrawer(false);
+  };
+
   const open = Boolean(anchorEl);
   return (
-    <StyledBox className="sm:px-16 gap-8 lg:px-32 p-3 flex w-full ">
-      <StyledButton onClick={handlePopoverOpen}>Menu Item</StyledButton>
-      <StyledButton>Menu Item</StyledButton>
-      <StyledButton>Menu Item</StyledButton>
-      <StyledButton>Menu Item</StyledButton>
-      <StyledButton>Menu Item</StyledButton>
-      <StyledButton>Menu Item</StyledButton>
-      <StyledButton>Menu Item</StyledButton>
-      <StyledButton>Menu Item</StyledButton>
-      <StyledButton>Menu Item</StyledButton>
-      <StyledButton>Menu Item</StyledButton>
-      <StyledButton>Menu Item</StyledButton>
-      <StyledButton>Menu Item</StyledButton>
+    <StyledBox id="1" className="hidden sm:px-16 gap-8 lg:px-32 p-3 sm:flex">
+      {menuItems.map((item, index) => (
+        <StyledButton onClick={index == 0 && handlePopoverOpen} key={item.text}>
+          {item.text}
+        </StyledButton>
+      ))}
       <StyledPopover
         className=" flex w-full"
         id="menu-popover"
@@ -59,7 +91,7 @@ const Menu = () => {
           horizontal: "left",
         }}
       >
-        <Box className="flex flex-row gap-24" p={5}>
+        <Box className="flex flex-row gap-24 bg-gray-100" p={5}>
           <div>
             <Typography fontSize={14} marginBottom={1} fontWeight={500}>
               Header
@@ -121,6 +153,9 @@ const Menu = () => {
           <CardMedia component="img" image={menuImage} />
         </Box>
       </StyledPopover>
+      <Drawer anchor="left" open={openDrawer} onClose={closeFunc}>
+        {drawer}
+      </Drawer>
     </StyledBox>
   );
 };
